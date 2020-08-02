@@ -1,0 +1,8 @@
+spring:
+  profiles: mysql
+  datasource:
+    url: jdbc:mysql://localhost:13306/test
+    hikari:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 1234

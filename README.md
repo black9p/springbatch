@@ -39,3 +39,6 @@ $java -jar batch-application.jar --job.name=simpleJob
 ### Batch Status vs Exit Status
 - Batch Status : Job 또는 Step의 실행결과를 Spring에서 기록할 때 사용하는 Enum
 - Exit Status : Step 실행 후 상태
+
+## Decider
+- from() : 이벤트 리스너 역할. 일치상태에 따라 to() 호출.

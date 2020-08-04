@@ -20,17 +20,17 @@ public class SimpleJobConfiguration {
     @Bean
     public Job simpleJob() {
         return jobBuilderFactory.get("simpleJob")
-                .start(simpleStep1())
-                .build();
+                                .start(simpleStep1())
+                                .build();
     }
 
     @Bean
     public Step simpleStep1() {
         return stepBuilderFactory.get("simpleStep1")
-                .tasklet((stepContribution, chunkContext) -> {
-                    log.info(">>> This is Step1");
-                    return RepeatStatus.FINISHED;
-                })
-                .build();
+                                 .tasklet((stepContribution, chunkContext) -> {
+                                     log.info(">>> This is Step1");
+                                     return RepeatStatus.FINISHED;
+                                 })
+                                 .build();
     }
 }

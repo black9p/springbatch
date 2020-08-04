@@ -27,3 +27,15 @@ spring.batch.job.names: ${job.name:NONE}
 ```shell script
 $java -jar batch-application.jar --job.name=simpleJob
 ```
+
+## Conditional Flow
+- StepNextConditionalJobConfiguration
+
+- on() : 캐치할 ExitStatus 지정. * 일경우 모든 ExitStatus 지정. BatchStatus가 아니라 ExitStatus.
+- to() : 다음으로 이동할 Step 지정
+- from() : 일정의 이벤트 리스너 역할.
+- end() : FlowBuilder 반환 end(on(*) 뒤에있다)와 FlowBuilder를 종료하는 end(build() 앞에있다) 2개가 있다.
+
+### Batch Status vs Exit Status
+- Batch Status : Job 또는 Step의 실행결과를 Spring에서 기록할 때 사용하는 Enum
+- Exit Status : Step 실행 후 상태

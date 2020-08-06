@@ -42,3 +42,27 @@ $java -jar batch-application.jar --job.name=simpleJob
 
 ## Decider
 - from() : 이벤트 리스너 역할. 일치상태에 따라 to() 호출.
+
+## JobParameter와 Scope
+- JobParameter : 스프링배치 내부 혹은 외부에서 받아 쓸수 있는 파라미터값으로 Scope를 반드시 지정해주어야 한다.
+- Scope : @StepScope, @JobScope
+    - Job Parameter를 사용하기 위해선 반드시 @StepScope, @JobScope로 Bean을 생성해야 한다.
+    - @JobScope : Step 선언문에서 사용가능. Double, Long, Date, String 가능
+    - @StepScope : Tasklet, ItemReader, ItemWriter, ItemProcessor에서 사용가능.
+
+## @StepScope, @JobScope
+- Bean 생성 시점을 지정된 Scope가 실행되는 시점으로 지연시킴
+- Job Parameter의 Late Binding이 가능. 비지니스 로직 처리단계에서 Job Parameter를 할당시킬수 있다.
+- 동시성 이슈 발생을 예방할 수 있다.
+
+## Chunk
+- Chunk : 각 커밋 사이에 처리되는 row수
+- Spring Batch는 Chunk 단위로 트랜잭션을 수행한다
+- Reader와 Processor에서 1건씩 다뤄지고, Writer에선 Chunk 단위로 처리된다.
+
+## Page Size vs Chunk Size
+- Chunk Size : 한번에 처리될 트랜잭션 단위
+- Page Size : 한번에 조회할 Item 양
+- Chunk size 100, Page size 10 일때, 10번의 조회가 일어나고 이것은 성능문제 및 JPA 영속성 컨텍스트가 깨지는 문제도 발생시킬 수 있다.
+- 2개의 값(Page Size == Chunk Size)을 일치시키는 것이 보편적으로 좋은 방법이다.
+
